@@ -4,10 +4,10 @@ import { MusicPlayer,TimeControl,InputPicker } from "../style/playControlStyle";
 import { useState } from "react";
 
 
-const PlayControl = () =>{
+const PlayControl = ({toggle}) =>{
     const [isPlaying,setIsPlaying] = useState(false);
     return(
-        <MusicPlayer>
+        <MusicPlayer toggled={toggle?"toggled":""}>
               <TimeControl>
                 <InputPicker>
                   <h3>0:00</h3>  

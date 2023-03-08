@@ -13,8 +13,8 @@ function App() {
     <div>
       <header>
          <Nav toggle={toggle} setToggle={setToggle}/>
-         <CoverContainer />
-         <PlayControl />
+         <CoverContainer toggle={toggle}/>
+         <PlayControl toggle={toggle}/>
          <Library toggle={toggle} setToggle={setToggle}/>
       </header>
     </div>

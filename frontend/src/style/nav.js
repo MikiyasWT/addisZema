@@ -11,6 +11,7 @@ background:#743459;
 padding-left:20rem;
 max-width:100%;
 
+transition: 2s;
 ${props => props.toggled &&`
     background: green;
     padding-left:40rem;

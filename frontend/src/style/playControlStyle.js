@@ -12,6 +12,13 @@ padding-left: 10rem;
 padding-bottom:1rem;
 overflow: hidden;
 background:yellow;
+
+
+transition: 2s;
+${props => props.toggled &&`
+    background: green;
+    padding-left:30rem;
+  `}
 `;
 
 export const TimeControl = styled.div`

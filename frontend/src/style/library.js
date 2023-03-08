@@ -12,5 +12,9 @@ position: absolute;
     overflow-y: hidden;
     box-shadow: 2px 2px 50px gray;
     background:#743459;
+    
 `;
+
+
+
 

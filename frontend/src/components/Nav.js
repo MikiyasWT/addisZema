@@ -1,6 +1,6 @@
 import { NavStyle } from "../style/nav"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMusic} from "@fortawesome/free-solid-svg-icons"
+import { faMusic,faMagnifyingGlass, faPlus,faMinus,faTrash,faEllipsisVertical,faPenClip} from "@fortawesome/free-solid-svg-icons"
 
 const Nav = ({toggle,setToggle}) =>{
 
@@ -14,6 +14,9 @@ const Nav = ({toggle,setToggle}) =>{
            </button>
            <button onClick={()=>setToggle((prev)=>!prev)}>
             Library <FontAwesomeIcon className="libraryIcon" icon={faMusic} />
+           </button>
+           <button>
+            Add <FontAwesomeIcon icon={faPlus} />
            </button>
            </div>
            

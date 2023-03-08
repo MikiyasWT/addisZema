@@ -1,11 +1,11 @@
 import { Cover } from "../style/coverContainer";
 import test from "../assets/images/test.jpg"
  
- const CoverContainer = () => {
+ const CoverContainer = ({toggle}) => {
    
    
     return (
-        <Cover>
+        <Cover toggled={toggle?"toggled":""}>
             
             <img src={test} alt="test cover image"></img>
             <h2>Teddy Afro</h2>

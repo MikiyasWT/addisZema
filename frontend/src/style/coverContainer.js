@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const Cover = styled.div`
 background:cyan;
 max-width: 100%;
-height: 65vh;
+height: 63.5vh;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -13,6 +13,13 @@ margin-top: 0.75rem;
 padding-left: 10rem;
 padding-top:1rem;
 overflow: hidden;
+margin-bottom:1rem;
+transition: 2s;
+${props => props.toggled &&`
+    background: green;
+    padding-left:30rem;
+  `}
+
 
 img {
     width:30%;
