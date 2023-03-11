@@ -8,8 +8,8 @@ const PlayControl = ({toggle}) =>{
     const [isPlaying,setIsPlaying] = useState(false);
     return(
         <MusicPlayer toggled={toggle?"toggled":""}>
-              <TimeControl>
-                <InputPicker>
+              <TimeControl toggled={toggle?"toggled":""}>
+                <InputPicker toggled={toggle?"toggled":""}>
                   <h3>0:00</h3>  
                   <input 
                     min={0} 

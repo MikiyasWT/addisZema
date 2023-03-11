@@ -2,7 +2,7 @@
 import styled from "styled-components"
 
 export const Cover = styled.div`
-background:cyan;
+
 max-width: 100%;
 height: 63.5vh;
 display: flex;
@@ -15,8 +15,7 @@ padding-top:1rem;
 overflow: hidden;
 margin-bottom:1rem;
 transition: 2s;
-${props => props.toggled &&`
-    background: green;
+${props => props.toggled &&` 
     padding-left:30rem;
   `}
 
@@ -36,6 +35,13 @@ h2{
 h3{
     padding:0rem 0rem 0rem 1rem;
     font-size: 1rem;
+}
+
+
+@media screen and (max-width:768px){
+    
+    max-width: 100%; 
+    padding-left: 0rem;
 }
 `;
 
