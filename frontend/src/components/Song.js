@@ -2,6 +2,9 @@ import test from "../assets/images/test.jpg"
 import { IconContainer,Option, SongInfo, SongStyle } from "../style/song";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMinus,faTrash,faEllipsisVertical,faPenClip} from "@fortawesome/free-solid-svg-icons"
+
+
+
 const Song = ({selected,setSelected}) => {
 
     return(

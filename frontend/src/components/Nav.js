@@ -1,7 +1,7 @@
 import { NavStyle } from "../style/nav"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMusic,faMagnifyingGlass, faPlus,faMinus,faTrash,faEllipsisVertical,faPenClip} from "@fortawesome/free-solid-svg-icons"
-
+import {motion} from "framer-motion"
 const Nav = ({toggle,setToggle}) =>{
 
     return (
@@ -9,15 +9,23 @@ const Nav = ({toggle,setToggle}) =>{
            <h3>addisZema</h3>
 
            <div>
-           <button>
+           <motion.button
+           whileHover={{scale:1.1}}
+           whileTap={{scale:0.9}}
+           >
             Stats
-           </button>
-           <button onClick={()=>setToggle((prev)=>!prev)}>
+           </motion.button>
+           <motion.button 
+           whileHover={{scale:1.1}}
+           whileTap={{scale:0.9}}
+           onClick={()=>setToggle((prev)=>!prev)}>
             Library <FontAwesomeIcon className="libraryIcon" icon={faMusic} />
-           </button>
-           <button>
+           </motion.button>
+           <motion.button
+           whileHover={{scale:1.1}}
+           whileTap={{scale:0.9}}>
             Add <FontAwesomeIcon icon={faPlus} />
-           </button>
+           </motion.button>
            </div>
            
            

@@ -1,6 +1,6 @@
 import { Cover } from "../style/coverContainer";
 import test from "../assets/images/test.jpg"
- 
+
  const CoverContainer = ({toggle}) => {
    
    

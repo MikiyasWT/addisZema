@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 
 
 
-const Library = ({toggle,setToggle,selected,setSelected}) => {
+const Library = ({toggle,setToggle,selected,setSelected,showDropDown,setShowDropDown}) => {
 
     return (
       <>
@@ -17,7 +17,10 @@ const Library = ({toggle,setToggle,selected,setSelected}) => {
                
                     <>
                    <SearchBarContainer>
-                        <SearchBar toggle={toggle} setToggle={setToggle}/>
+                        <SearchBar 
+                        showDropDown={showDropDown}
+                        setShowDropDown={setShowDropDown}
+                        toggle={toggle} setToggle={setToggle}/>
                    </SearchBarContainer>
       
                    <LibraryStyle

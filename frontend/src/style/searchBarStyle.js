@@ -81,11 +81,8 @@ button {
 
 
 export const FilterType = styled.div`
-width:25%;
-margin:0rem 2rem;
+width:35%;
+margin:0rem 0rem;
 `;
 
 
-export const Option = styled.div`
-height:2rem;
-`;

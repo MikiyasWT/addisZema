@@ -3,11 +3,12 @@ import {faArrowLeft,faMagnifyingGlass,faEllipsisVertical} from "@fortawesome/fre
 import { InputContainer,FilterType,BackArrow, SearchBarWrapper } from "../style/searchBarStyle";
 import { useState } from "react";
 import {motion} from 'framer-motion'
+import DropdownFIlter from "./DropdownFilter";
 
 
 
 
-const SearchBar = ({toggle,setToggle}) => {
+const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
     const [searchIconClicked,setSearchIconClicked] = useState(false)
     return(
         <SearchBarWrapper>
@@ -16,12 +17,15 @@ const SearchBar = ({toggle,setToggle}) => {
                  
             </BackArrow>
 
-            <FilterType>
+            
                 {
-                    !searchIconClicked && <h2>All Music</h2>
+                    !searchIconClicked && <h2 onClick={()=>setShowDropDown((prev)=>!prev)}>All Music <span>7/40</span></h2>    
                 }
-              
-            </FilterType>
+
+                {
+                    showDropDown && <DropdownFIlter />
+                    }
+            
 
             <InputContainer searchIconClicked={searchIconClicked}>
               {
@@ -41,3 +45,11 @@ const SearchBar = ({toggle,setToggle}) => {
 
 
 export default SearchBar;
+
+
+{/* <FilterType> 
+{
+    !searchIconClicked && <h2>All Music <span>7/40</span></h2>
+}
+
+</FilterType> */}
