@@ -13,11 +13,14 @@ function App() {
  const [toggle,setToggle] = useState(false)
  const [selected,setSelected] = useState(false); 
  const [showDropDown,setShowDropDown] = useState(false)
+ const [deleteConfirmModal,setDeleteConfirmModal] = useState(false)
   return (
     <div>
       <header>
         <GlobalStyle />
-        
+        { showDropDown &&
+           <Modal setShowDropDown={setShowDropDown}/>
+        }
          <Nav toggle={toggle} setToggle={setToggle}/>
          <CoverContainer 
            selected={selected}

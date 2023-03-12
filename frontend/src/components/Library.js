@@ -32,22 +32,16 @@ const Library = ({toggle,setToggle,selected,setSelected,showDropDown,setShowDrop
                         
                      
                        <div className="library-songs ">
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
-                          <Song />
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+
                        </div>
                   </LibraryStyle>
       

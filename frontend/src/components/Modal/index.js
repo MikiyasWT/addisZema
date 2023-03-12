@@ -16,10 +16,10 @@ const modalDropIn  = {
         }
 }
 
-const Modal = ({handleClose,text}) => {
+const Modal = ({setShowDropDown,handleClose,text}) => {
 
     return(
-      <BackDrop>
+      <BackDrop setShowDropDown={setShowDropDown}>
          <ModalStyle
             variants={modalDropIn}
             initial="hidden"
@@ -34,8 +34,8 @@ const Modal = ({handleClose,text}) => {
             <p>Do you really wants to delete this song? THis process can't be undone.</p>
            </div>
            <Buttons>
-            <button style={{background:'lightgray'}}>Cancel</button>
-            <button style={{background:'lightred'}}>Delete</button>
+            <button style={{background:'#6573bd'}} onClick={()=>setShowDropDown((prev) => !prev)}>Cancel</button>
+            <button style={{background:'#ed4d26'}}>Delete</button>
            </Buttons>
          </ModalStyle>
       </BackDrop>

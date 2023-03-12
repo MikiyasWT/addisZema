@@ -4,12 +4,13 @@ import { InputContainer,FilterType,BackArrow, SearchBarWrapper } from "../style/
 import { useState } from "react";
 import {motion} from 'framer-motion'
 import DropdownFIlter from "./DropdownFilter";
-
+import Select from "react-select"
 
 
 
 const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
     const [searchIconClicked,setSearchIconClicked] = useState(false)
+
     return(
         <SearchBarWrapper>
             <BackArrow onClick={()=>setToggle((prev)=>!prev)}>
@@ -23,7 +24,18 @@ const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
                 }
 
                 {
-                    showDropDown && <DropdownFIlter />
+                    showDropDown && 
+                    
+                    <DropdownFIlter>
+                               
+                               <option value="" hidden>
+                                    All Music
+                                </option>
+                                <option value="1">Hip Hop</option>
+                                <option value="2">JAZ</option>
+                                <option value="3">Reggae</option>
+                                <option value="4">Electronics</option> 
+                    </DropdownFIlter>
                     }
             
 
@@ -47,9 +59,3 @@ const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
 export default SearchBar;
 
 
-{/* <FilterType> 
-{
-    !searchIconClicked && <h2>All Music <span>7/40</span></h2>
-}
-
-</FilterType> */}
