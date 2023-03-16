@@ -7,6 +7,7 @@ import Library from './components/Library';
 import { useState } from 'react';
 import { GlobalStyle } from './style/GlobalStyles';
 import Modal from './components/Modal';
+import Form from './components/Form';
 
 function App() {
 
@@ -14,24 +15,31 @@ function App() {
  const [selected,setSelected] = useState(false); 
  const [showDropDown,setShowDropDown] = useState(false)
  const [deleteConfirmModal,setDeleteConfirmModal] = useState(false)
-  return (
+ const [addFormStatus,setAddFormStatus] = useState(false)
+ 
+ return (
     <div>
       <header>
         <GlobalStyle />
-        { showDropDown &&
-           <Modal setShowDropDown={setShowDropDown}/>
+        { deleteConfirmModal &&
+           <Modal setDeleteConfirmModal={setDeleteConfirmModal}/>
         }
-         <Nav toggle={toggle} setToggle={setToggle}/>
+         <Nav toggle={toggle} setToggle={setToggle} setAddFormStatus={setAddFormStatus}/>
          <CoverContainer 
            selected={selected}
            setSelected={setSelected}
            toggle={toggle}/>
          <PlayControl toggle={toggle} selected={selected} setSelected={setSelected}/>
          <Library 
+           deleteConfirmModal={deleteConfirmModal}
+           setDeleteConfirmModal={setDeleteConfirmModal}
            showDropDown={showDropDown}
            setShowDropDown={setShowDropDown}
-            selected={selected} setSelected={setSelected} toggle={toggle} setToggle={setToggle}/>
+           selected={selected} setSelected={setSelected} toggle={toggle} setToggle={setToggle}/>
       </header>
+      { addFormStatus &&
+        <Form setAddFormStatus={setAddFormStatus} />
+        } 
     </div>
   );
 }

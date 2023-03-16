@@ -2,7 +2,7 @@ import { NavStyle } from "../style/nav"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMusic,faMagnifyingGlass, faPlus,faMinus,faTrash,faEllipsisVertical,faPenClip} from "@fortawesome/free-solid-svg-icons"
 import {motion} from "framer-motion"
-const Nav = ({toggle,setToggle}) =>{
+const Nav = ({toggle,setToggle,setAddFormStatus}) =>{
 
     return (
         <NavStyle toggled={toggle?"toggled":""}>
@@ -23,7 +23,8 @@ const Nav = ({toggle,setToggle}) =>{
            </motion.button>
            <motion.button
            whileHover={{scale:1.1}}
-           whileTap={{scale:0.9}}>
+           whileTap={{scale:0.9}}
+           onClick={()=>setAddFormStatus((prev)=>!prev)}>
             Add <FontAwesomeIcon icon={faPlus} />
            </motion.button>
            </div>

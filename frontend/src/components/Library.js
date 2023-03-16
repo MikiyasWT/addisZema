@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 
 
 
-const Library = ({toggle,setToggle,selected,setSelected,showDropDown,setShowDropDown}) => {
+const Library = ({toggle,setToggle,selected,setSelected,showDropDown,setShowDropDown,deleteConfirmModal,setDeleteConfirmModal}) => {
 
     return (
       <>
@@ -32,15 +32,17 @@ const Library = ({toggle,setToggle,selected,setSelected,showDropDown,setShowDrop
                         
                      
                        <div className="library-songs ">
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
-                          <Song showDropDown={showDropDown} setShowDropDown={setShowDropDown}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/><Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
+                          <Song deleteConfirmModal={deleteConfirmModal} setDeleteConfirmModal={setDeleteConfirmModal}/>
 
                        </div>
                   </LibraryStyle>

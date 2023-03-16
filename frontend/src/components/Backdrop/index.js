@@ -1,7 +1,7 @@
 import {motion} from "framer-motion"
 import { BackdropWrapper } from "../../style/Backdrop/backdropStyle";
 
-const BackDrop = ({children,setShowDropDown}) => {
+const BackDrop = ({children,setDeleteConfirmModal}) => {
 
     return(
       <BackdropWrapper
@@ -9,7 +9,7 @@ const BackDrop = ({children,setShowDropDown}) => {
       initial={{opacity:0}}
       animate={{opacity:1}}
       exit={{opacity:0}}
-      onClick={()=>setShowDropDown((prev)=>!prev)}
+      onClick={()=>setDeleteConfirmModal((prev)=>!prev)}
       >
        
        {children}

@@ -9,15 +9,10 @@ import styled from "styled-components";
 
 
 
-const Song = ({showDropDown,setShowDropDown}) => {
+const Song = ({deleteConfirmModal,setDeleteConfirmModal}) => {
 const [openMoreDropdown,setOpenMoreDropdown] = useState(false);
 const [showOptions,setShowOptions] = useState(false)
-const handleDropdownChange = ({value})=>{
-if(value == 2){
-
-}
-return;
-} 
+ 
 return(
           <SongStyle>
              <IconContainer>
@@ -35,7 +30,7 @@ return(
                 {
                   showOptions && <Twoicons>
                      <span className="editSong"><FaEdit /></span>
-                     <span onClick={()=>setShowDropDown((prev)=>!prev)} className="deleteSong"><FaMinusCircle /></span>
+                     <span onClick={()=>setDeleteConfirmModal((prev)=>!prev)} className="deleteSong"><FaMinusCircle /></span>
                 </Twoicons>
                 }
                    <div className="icon"><FontAwesomeIcon icon={faEllipsisVertical}/></div>
