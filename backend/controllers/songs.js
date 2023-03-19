@@ -1,46 +1,50 @@
 
 
-let Song = require('../models/song.model')
-const {songValidation} = require('../validation/songsValidation')
+let Song = require('../models/song.model');
 
- const getSongs = async (req,res) => {
+
+ 
+//list all songs in our database
+const getSongs = async (req,res) => {
     await Song.find()
          .then(songs => res.json(songs))
-         .catch(err => res.status(400).json('Error:' + err))
+         .catch(err => res.status(400).json({'success':'false','message':'failed to load songs','Error':err}))
 
-   
 }
 
+
+//return a particular song specified by it id in url
  const getSong = async (req,res) => {
     console.log(req.params.id)
      await Song.findById(req.params.id)
-      .then(song => res.json(song))
-      .catch(err => res.status(400).json('Error:' + err))
+      .then(song => res.status(200).json(song))
+      .catch(err => res.status(400).json({'success':'false','message':'song not found','Error':err}))
 }
 
  
 
-
+//add a new song to our database
 const addSong = async (req,res) => {
     
-const {error} = songValidation(req.body)
-if(error) return res.status(422).send(error.details[0].message)
+
 
    
     //const {title, artist, album, genre} = req.body
     const body = req.body
 
     const newSong = new Song(body);
-    console.log(body)
-   //  await newSong.save()
-   //    .then(() => res.json('New Song Added'))
-   //    .catch(err => res.status(400).json('Error:' + err));
+    
+    await newSong.save()
+      .then(() => res.status(201).json({'success':'true','message':'New Song Added'}))
+      .catch(err => res.status(422).json({'success':'false','message':'failed to add song','Error':err}));
+
+      //422 unprocessabile entity
 }
 
 
-
+//update already exisiting song details specified by id 
 const editSong = async (req,res) => {
-    const {name,dob,gender,salary} = req.body;
+    //const {name,dob,gender,salary} = req.body;
 
     const isSong = await Song.findById(req.params.id).exec()
 
@@ -60,12 +64,14 @@ const editSong = async (req,res) => {
 }
 
 
+
+// remove a song specified by unique id
  const removeSong = async (req,res) => {
    
 
     await Song.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Song deleted'))
-        .catch(err => res.status(400).json('Error:' + err))
+        .then(() => res.status(204).json({'success':'true','message':'Song removed '}))
+        .catch(err => res.status(400).json({'success':'false','message':'Song not removed','Error': err}))
 }
 
 
