@@ -6,15 +6,27 @@ import { faMinus,faTrash,faEllipsisVertical,faPenClip} from "@fortawesome/free-s
 import { useState } from "react";
 import DropdownFIlter from "./DropdownFilter";
 import styled from "styled-components";
+import {deleteSong} from "../redux/actions/songs"
+import {selectForDelete} from "../redux/actions/selectForDelete";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedForPlaying } from "../redux/actions/selectForPlay";
 
 
+const Song = ({deleteConfirmModal,setDeleteConfirmModal,song}) => {
 
-const Song = ({deleteConfirmModal,setDeleteConfirmModal}) => {
+const dispatch = useDispatch(); 
 const [openMoreDropdown,setOpenMoreDropdown] = useState(false);
 const [showOptions,setShowOptions] = useState(false)
- 
+const selectedSong = useSelector(state => state.selectedForDelete.selectedForDelete)
+
+console.log(selectedSong)
+
+const showDeleteConfirmModal = () => {
+   dispatch(selectForDelete(song));
+   setDeleteConfirmModal((prev)=>!prev);
+}
 return(
-          <SongStyle>
+          <SongStyle onClick={()=> dispatch(selectedForPlaying(song))}>
              <IconContainer>
                 <img src={test} alt="song icon"/>
 
@@ -24,13 +36,14 @@ return(
 
                <div className="songtitle">
                
-               <h2>Mask Off</h2>
+               <h2>{song.title.substr(0,10)}</h2>
                
                 <Option onClick={()=>setShowOptions((prev)=>!prev)}>
                 {
                   showOptions && <Twoicons>
                      <span className="editSong"><FaEdit /></span>
-                     <span onClick={()=>setDeleteConfirmModal((prev)=>!prev)} className="deleteSong"><FaMinusCircle /></span>
+                     
+                     <span onClick={() => showDeleteConfirmModal()} className="deleteSong"><FaMinusCircle /></span>
                 </Twoicons>
                 }
                    <div className="icon"><FontAwesomeIcon icon={faEllipsisVertical}/></div>
@@ -39,8 +52,8 @@ return(
                
                </div> 
                 <div>
-                  <h2>Future</h2>
-                  <h3>Rap</h3>
+                  <h2>{song.artist.substr(0,10)}</h2>
+                  <h3>{song.genre.substr(0,8)}</h3>
                 </div>
 
              </SongInfo>
@@ -54,8 +67,8 @@ return(
 export default Song;
 
 
-
-
+//<span onClick={() => {dispatch(deleteSong(song))}} className="deleteSong"><FaMinusCircle /></span>
+//<span onClick={()=>setDeleteConfirmModal((prev)=>!prev)} className="deleteSong"><FaMinusCircle /></span>
 
 
 

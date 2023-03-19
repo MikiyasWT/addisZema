@@ -4,10 +4,13 @@ import Nav from './components/Nav';
 import CoverContainer from './components/CoverConatiner';
 import PlayControl from './components/PlayControl';
 import Library from './components/Library';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GlobalStyle } from './style/GlobalStyles';
 import Modal from './components/Modal';
 import Form from './components/Form';
+import { useDispatch, useSelector } from 'react-redux';
+import {getSongs,addSong,updateSong,deleteSong} from "./redux/actions/songs"
+
 
 function App() {
 
@@ -16,7 +19,16 @@ function App() {
  const [showDropDown,setShowDropDown] = useState(false)
  const [deleteConfirmModal,setDeleteConfirmModal] = useState(false)
  const [addFormStatus,setAddFormStatus] = useState(false)
- 
+
+
+//  const dispatch = useDispatch();
+//  const songs = useSelector(state => state.songs.songs);
+//  const song = useSelector(state => state.songs.song);
+//  useEffect(() => {
+//       dispatch(getSongs())
+//       console.log(songs)
+//  },[])
+
  return (
     <div>
       <header>

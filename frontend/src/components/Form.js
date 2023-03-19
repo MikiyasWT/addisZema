@@ -3,42 +3,49 @@ import {motion} from "framer-motion";
 import {RightSideBarWrapper,SideBarStyle,AddingForm,FormDiv,FormLabels} from "../style/rightSideBar"
 import {useFormik} from "formik";
 import * as Yup from "yup";
-
+import {addSong} from "../redux/actions/songs"
+import { useDispatch, useSelector } from "react-redux";
 
 const Form = ({setAddFormStatus}) => {
+
+
+  const dispatch = useDispatch();
 
         //form handling with formik and yup validation
         const formik = useFormik({
             initialValues: {
-              name:"",
-              dob:"",
-              gender:"male",
-              salary:9000
+              title:"",
+              artist:"",
+              album:"",
+              genre:""
             },
       
             validationSchema: Yup.object({
-               name:Yup.string()
-                       .max(20,"Name can't exceed 20 characters")
-                       .min(4,"Name can't be lessthan 4 characters")
+               title:Yup.string()
+                       .max(20,"Song title can't exceed 20 characters")
+                       .min(4,"Song title can't be lessthan 4 characters")
                        .required("Name is required"),
-               dob:Yup.string()
-                      .required(),
-               gender:Yup.string()
-                          .default("male")
+               artist:Yup.string()
+                        .min(3,"Artist/s name can't be less than 3 characters")
+                        .max(30,"Artist/s name can't exceed 30 characters")
+                        .required(),
+               album:Yup.string()
+                          .min(3,"Album name can't be less than 3 characters")
+                          .max(15,"Album name can't exceed 15 characters")
                           .required(),
-               salary:Yup.number()
-                        .min(9000,"Net Salary can't be less than 9000birr")
-                        .max(78000,"Net salary can't exceed 78000 birr company scale")
+               genre:Yup.string()
+                        .min(3,"Genre can't be less than 3 characters")
+                        .max(15,"Genre can't exceed 15 characters")
                         .required()                          
             }),
       
             //on form submission
             onSubmit:(values,{resetForm}) => {
               
-              const employee = [];
-              employee.push(values);
-              //dispatch(addEmployee(employee[0]))
-             
+              const song = [];
+              song.push(values);
+              dispatch(addSong(song[0]));
+              setAddFormStatus((prev)=>!prev);
               resetForm({values:''})
              },
       
@@ -59,7 +66,7 @@ const Form = ({setAddFormStatus}) => {
       onClick={(e)=>e.stopPropagation()}>          
      
      <Title>
-       <h3>Add an Employee</h3>
+       <h3>Add New Song</h3>
      </Title>
       
   <AddingForm>
@@ -67,13 +74,13 @@ const Form = ({setAddFormStatus}) => {
       <form onSubmit={formik.handleSubmit}>
        <InputDiv>
           <div>
-            <FormLabels htmlFor="name" color={formik.touched.name && formik.errors.name? "red":"black"}>{formik.touched.name && formik.errors.name?formik.errors.name:'Employee Name'}</FormLabels>
+            <FormLabels htmlFor="title" color={formik.touched.name && formik.errors.name? "red":"black"}>{formik.touched.name && formik.errors.name?formik.errors.name:'Song title'}</FormLabels>
           </div>
           <div>
             <input type="text"
-             name="name"
-             placeholder="Enter Employee Name"
-             value={formik.values.name}
+             name="title"
+             placeholder="Enter Song title"
+             value={formik.values.title}
              onChange={formik.handleChange}
              onBlur={formik.handleBlur}
              />
@@ -82,13 +89,28 @@ const Form = ({setAddFormStatus}) => {
 
       <InputDiv>
           <div>
-            <FormLabels htmlFor="dob" color={formik.touched.dob && formik.errors.dob? "red":"black"}>{formik.touched.dob && formik.errors.dob?formik.errors.dob:'Date of Birth'}</FormLabels>
+            <FormLabels htmlFor="artist" color={formik.touched.dob && formik.errors.dob? "red":"black"}>{formik.touched.dob && formik.errors.dob?formik.errors.dob:'Artist/s Name'}</FormLabels>
           </div>
           <div>
-            <input type="Date"
-             name="dob"
-             placeholder="Employee Date of Birth"
-             value={formik.values.dob}
+            <input type="text"
+             name="artist"
+             placeholder="Artist/s name"
+             value={formik.values.artist}
+             onChange={formik.handleChange}
+             onBlur={formik.handleBlur}
+             />
+          </div>
+       </InputDiv>
+
+       <InputDiv>
+          <div>
+            <FormLabels htmlFor="album" color={formik.touched.dob && formik.errors.dob? "red":"black"}>{formik.touched.dob && formik.errors.dob?formik.errors.dob:'Album Name'}</FormLabels>
+          </div>
+          <div>
+            <input type="text"
+             name="album"
+             placeholder="Album name"
+             value={formik.values.album}
              onChange={formik.handleChange}
              onBlur={formik.handleBlur}
              />
@@ -96,35 +118,19 @@ const Form = ({setAddFormStatus}) => {
        </InputDiv>
 
 
-      <InputDiv>
-          <div>
-            <FormLabels htmlFor="gender" color={formik.touched.gender && formik.errors.gender? "red":"black"}>{formik.touched.gender && formik.errors.gender?formik.errors.gender:'Gender'}</FormLabels>
-          </div>
-          <div>
 
-          
-          <select
-           value={formik.values.gender}
-           onChange={formik.handleChange}
-           required
-           name="gender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-          </select>
-          </div>
-       </InputDiv>
 
 
       <InputDiv>
           <div>
-             <FormLabels htmlFor="salary" color={formik.touched.salary && formik.errors.salary? "red":"black"} >{formik.touched.salary && formik.errors.salary?formik.errors.salary:'Salary'}</FormLabels>
+             <FormLabels htmlFor="genre" color={formik.touched.salary && formik.errors.salary? "red":"black"} >{formik.touched.salary && formik.errors.salary?formik.errors.salary:'Genre'}</FormLabels>
           </div>
           <div>
              <input
-              type="Number"
-              name="salary"
-              placeholder="Employee's Salary"
-              value={formik.values.salary}
+              type="text"
+              name="genre"
+              placeholder="Song's genre"
+              value={formik.values.genre}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               />
