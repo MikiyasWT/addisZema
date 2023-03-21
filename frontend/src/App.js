@@ -9,16 +9,16 @@ import { GlobalStyle } from './style/GlobalStyles';
 import Modal from './components/Modal';
 import Form from './components/Form';
 import { useDispatch, useSelector } from 'react-redux';
-import {getSongs,addSong,updateSong,deleteSong} from "./redux/actions/songs"
-
+import Stats from './components/Stats';
 
 function App() {
 
  const [toggle,setToggle] = useState(false)
  const [selected,setSelected] = useState(false); 
- const [showDropDown,setShowDropDown] = useState(false)
- const [deleteConfirmModal,setDeleteConfirmModal] = useState(false)
- const [addFormStatus,setAddFormStatus] = useState(false)
+ const [showDropDown,setShowDropDown] = useState(false);
+ const [deleteConfirmModal,setDeleteConfirmModal] = useState(false);
+ const [addFormStatus,setAddFormStatus] = useState(false);
+ const [displayStats,setDisplayStats] = useState(false);
 
 
 //  const dispatch = useDispatch();
@@ -28,15 +28,17 @@ function App() {
 //       dispatch(getSongs())
 //       console.log(songs)
 //  },[])
-
+const sidebarStatus = useSelector((state) => state.sideBar.sideBar)
  return (
     <div>
       <header>
         <GlobalStyle />
         { deleteConfirmModal &&
            <Modal setDeleteConfirmModal={setDeleteConfirmModal}/>
+        }{
+          displayStats && <Stats setDisplayStats={setDisplayStats}/>
         }
-         <Nav toggle={toggle} setToggle={setToggle} setAddFormStatus={setAddFormStatus}/>
+         <Nav toggle={toggle} setToggle={setToggle} setDisplayStats={setDisplayStats}/>
          <CoverContainer 
            selected={selected}
            setSelected={setSelected}
@@ -49,8 +51,8 @@ function App() {
            setShowDropDown={setShowDropDown}
            selected={selected} setSelected={setSelected} toggle={toggle} setToggle={setToggle}/>
       </header>
-      { addFormStatus &&
-        <Form setAddFormStatus={setAddFormStatus} />
+      { sidebarStatus &&
+        <Form />
         } 
     </div>
   );

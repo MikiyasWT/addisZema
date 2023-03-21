@@ -15,7 +15,7 @@ const getSongs = async (req,res) => {
 
 //return a particular song specified by it id in url
  const getSong = async (req,res) => {
-    console.log(req.params.id)
+    
      await Song.findById(req.params.id)
       .then(song => res.status(200).json(song))
       .catch(err => res.status(400).json({'success':'false','message':'song not found','Error':err}))
@@ -45,7 +45,7 @@ const addSong = async (req,res) => {
 //update already exisiting song details specified by id 
 const editSong = async (req,res) => {
     //const {name,dob,gender,salary} = req.body;
-
+    
     const isSong = await Song.findById(req.params.id).exec()
 
     if(!isSong) return res.status(400).json('song not found')

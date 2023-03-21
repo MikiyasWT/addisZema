@@ -22,6 +22,10 @@ export const InputContainer = styled.div`
 width:10%;
 padding:0rem 0rem;
 
+input {
+    font-size:21px;
+    padding-left:2rem;
+}
 
 button {
     border:none;

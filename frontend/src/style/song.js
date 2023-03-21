@@ -12,7 +12,7 @@ padding:0.5rem 0.25rem;
 background:#6868ef;
 
 ${props => props.selected &&`
-    background: green;
+   background:violet;
     
   `}
 

@@ -1,5 +1,5 @@
 import { Cover } from "../style/coverContainer";
-import test from "../assets/images/test.jpg"
+import covercontainer from "../assets/images/covercontainer.png";
 import {motion} from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
   
     const dispatch = useDispatch()
     const currentSong = useSelector(state => state.selectedForPlaying.playingSong)
-    console.log(currentSong)
+    
    
     return (
         <Cover toggled={toggle?"toggled":""}>
@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
                rotate: 360,
                duration:10
                 }}
-            src={test} alt="test cover image" />
+            src={covercontainer} alt="test cover image" />
      
 
             <h2>{currentSong?currentSong.artist:"unknown Artist"}</h2>

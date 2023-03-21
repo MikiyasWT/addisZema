@@ -2,7 +2,7 @@ import { LibraryStyle,SideBarWrapper,SearchBarContainer ,SideBar} from "../style
 import Song from "./Song";
 import {motion} from "framer-motion"
 import SearchBar from "./SearchBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { getSongs } from "../redux/actions/songs";
 import {selectedForPlaying} from "../redux/actions/selectForPlay";
@@ -13,10 +13,13 @@ const Library = ({toggle,setToggle,selected,setSelected,showDropDown,setShowDrop
 const dispatch = useDispatch();
 const songs = useSelector(state => state.songs.songs);
 const song = useSelector(state => state.songs.song);
+const [searchTerm,setSearchTerm] = useState('');
+
+
 useEffect(() => {
       dispatch(getSongs())
-      console.log(songs)
-      },[song])
+      
+      },[song,searchTerm])
     return (
       <>
       {
@@ -26,6 +29,8 @@ useEffect(() => {
                     <>
                    <SearchBarContainer>
                         <SearchBar 
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
                         showDropDown={showDropDown}
                         setShowDropDown={setShowDropDown}
                         toggle={toggle} setToggle={setToggle}/>
@@ -41,14 +46,29 @@ useEffect(() => {
                      
                        <div className="library-songs ">
                         {
-                          songs && songs.sort((a, b) => a.title.localeCompare(b.title)).map((song,index) => (
+                          songs && songs.sort((a, b) => a.title.localeCompare(b.title))
+                          .filter((val) => {
+                              if(searchTerm == ""){
+                                 return val;    
+                              }
+                              else if(val.title.toLowerCase().includes(searchTerm.toLowerCase())){
+                                    return val;
+                              }
+                              else if(val.artist.toLowerCase().includes(searchTerm.toLowerCase())){
+                                    return val;
+                              }
+                              else if(val.genre.toLowerCase().includes(searchTerm.toLowerCase())){
+                                    return val;
+                              }
+                          })
+                          .map((song,index) => (
                               <Song 
                                     key={index}
                                     song={song}
                                     deleteConfirmModal={deleteConfirmModal}
                                     setDeleteConfirmModal={setDeleteConfirmModal}
                                     />
-                          ))    
+                          ))     
                         }
 
                        </div>
@@ -64,3 +84,18 @@ useEffect(() => {
 }
 
 export default Library;
+
+{/* <div className="library-songs ">
+                        {
+                          songs && songs.sort((a, b) => a.title.localeCompare(b.title)).map((song,index) => (
+                              <Song 
+                                    key={index}
+                                    song={song}
+                                    deleteConfirmModal={deleteConfirmModal}
+                                    setDeleteConfirmModal={setDeleteConfirmModal}
+                                    />
+                          ))    
+                        }
+
+</div> */}
+

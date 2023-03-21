@@ -1,4 +1,5 @@
-import test from "../assets/images/test.jpg"
+
+import musicsidebar from "../assets/images/musicsidebar.png";
 import { IconContainer,Option,Artist,SongInfo,Twoicons, SongStyle } from "../style/song";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {FaEdit,FaMinusCircle} from 'react-icons/fa'
@@ -10,25 +11,42 @@ import {deleteSong} from "../redux/actions/songs"
 import {selectForDelete} from "../redux/actions/selectForDelete";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedForPlaying } from "../redux/actions/selectForPlay";
+import { showSideBar } from "../redux/actions/sideBar";
+import { selectForEdit } from "../redux/actions/selectForEdit";
 
 
-const Song = ({deleteConfirmModal,setDeleteConfirmModal,song}) => {
+const Song = ({deleteConfirmModal,setDeleteConfirmModal,song,setAddFormStatus}) => {
 
 const dispatch = useDispatch(); 
 const [openMoreDropdown,setOpenMoreDropdown] = useState(false);
 const [showOptions,setShowOptions] = useState(false)
 const selectedSong = useSelector(state => state.selectedForDelete.selectedForDelete)
+const currentSong = useSelector(state => state.selectedForPlaying.playingSong)
+let selectedSongBackground = false;
 
-console.log(selectedSong)
 
 const showDeleteConfirmModal = () => {
    dispatch(selectForDelete(song));
    setDeleteConfirmModal((prev)=>!prev);
 }
+
+const showEditSideForm = () => {
+   dispatch(selectForEdit(song))
+   dispatch(showSideBar((prev)=>!prev));
+
+}
+
+const songSelected = () => {
+    dispatch(selectedForPlaying(song))
+    if(currentSong && currentSong.title === song.title){
+      return selectedSongBackground = true;
+      
+   } 
+} 
 return(
-          <SongStyle onClick={()=> dispatch(selectedForPlaying(song))}>
+<SongStyle onClick={()=> songSelected()} selected={selectedSongBackground}>
              <IconContainer>
-                <img src={test} alt="song icon"/>
+                <img src={musicsidebar} alt="song icon"/>
 
              </IconContainer>
 
@@ -41,7 +59,7 @@ return(
                 <Option onClick={()=>setShowOptions((prev)=>!prev)}>
                 {
                   showOptions && <Twoicons>
-                     <span className="editSong"><FaEdit /></span>
+                     <span className="editSong" onClick={()=>showEditSideForm()}><FaEdit /></span>
                      
                      <span onClick={() => showDeleteConfirmModal()} className="deleteSong"><FaMinusCircle /></span>
                 </Twoicons>
@@ -65,26 +83,4 @@ return(
 
 
 export default Song;
-
-
-//<span onClick={() => {dispatch(deleteSong(song))}} className="deleteSong"><FaMinusCircle /></span>
-//<span onClick={()=>setDeleteConfirmModal((prev)=>!prev)} className="deleteSong"><FaMinusCircle /></span>
-
-
-
-{/* <Option onClick={()=>setOpenMoreDropdown((prev)=>!prev)}>
-<FontAwesomeIcon icon={faEllipsisVertical}/>
-</Option>
-<DropOption>{
-   openMoreDropdown && 
-   
-   <DropdownFIlter>
-           <option value="1">Edit</option>
-           <option value="2">Delete</option>
-           
-   </DropdownFIlter>
-}
-</DropOption> */}
-
-
 

@@ -3,22 +3,40 @@ import {motion} from "framer-motion";
 import {RightSideBarWrapper,SideBarStyle,AddingForm,FormDiv,FormLabels} from "../style/rightSideBar"
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import {addSong} from "../redux/actions/songs"
+import {addSong,deleteSong,updateSong} from "../redux/actions/songs";
+import { showSideBar} from "../redux/actions/sideBar";
 import { useDispatch, useSelector } from "react-redux";
+import { selectForEdit } from "../redux/actions/selectForEdit";
 
-const Form = ({setAddFormStatus}) => {
+const Form = () => {
 
 
   const dispatch = useDispatch();
+  const sidebarStatus = useSelector((state) => state.sideBar.sideBar)
+  const songToBeEdited = useSelector(state => state.selectedEdit.selectedForEdit)
 
+  const checkIfNewOrExisting = async (song) =>{
+    if(songToBeEdited){
+      await dispatch(updateSong(song[0]))
+      await dispatch(selectForEdit(null))
+      
+    } 
+
+    return dispatch(addSong(song[0]));
+  }
         //form handling with formik and yup validation
+     
+        
         const formik = useFormik({
-            initialValues: {
+          initialValues:songToBeEdited?songToBeEdited:{
               title:"",
               artist:"",
               album:"",
               genre:""
             },
+ 
+
+            
       
             validationSchema: Yup.object({
                title:Yup.string()
@@ -44,9 +62,9 @@ const Form = ({setAddFormStatus}) => {
               
               const song = [];
               song.push(values);
-              dispatch(addSong(song[0]));
-              setAddFormStatus((prev)=>!prev);
-              resetForm({values:''})
+              checkIfNewOrExisting(song);
+              dispatch(showSideBar((prev)=>!prev));
+              resetForm({values:''});
              },
       
           })
@@ -55,7 +73,7 @@ const Form = ({setAddFormStatus}) => {
         animate={{opacity:1}}
         initial={{opacity:0 }}
         exit={{opacity:0}}
-        onClick={()=>setAddFormStatus((prev)=>!prev)}
+        onClick={()=>dispatch(showSideBar((prev)=>!prev))}
         >
   
   <SideBarStyle 
@@ -74,7 +92,7 @@ const Form = ({setAddFormStatus}) => {
       <form onSubmit={formik.handleSubmit}>
        <InputDiv>
           <div>
-            <FormLabels htmlFor="title" color={formik.touched.name && formik.errors.name? "red":"black"}>{formik.touched.name && formik.errors.name?formik.errors.name:'Song title'}</FormLabels>
+            <FormLabels htmlFor="title" color={formik.touched.title && formik.errors.title? "red":"black"}>{formik.touched.title && formik.errors.title?formik.errors.title:'Song title'}</FormLabels>
           </div>
           <div>
             <input type="text"
@@ -89,7 +107,7 @@ const Form = ({setAddFormStatus}) => {
 
       <InputDiv>
           <div>
-            <FormLabels htmlFor="artist" color={formik.touched.dob && formik.errors.dob? "red":"black"}>{formik.touched.dob && formik.errors.dob?formik.errors.dob:'Artist/s Name'}</FormLabels>
+            <FormLabels htmlFor="artist" color={formik.touched.artist && formik.errors.artist? "red":"black"}>{formik.touched.artist && formik.errors.artist?formik.errors.artist:'Artist/s Name'}</FormLabels>
           </div>
           <div>
             <input type="text"
@@ -104,7 +122,7 @@ const Form = ({setAddFormStatus}) => {
 
        <InputDiv>
           <div>
-            <FormLabels htmlFor="album" color={formik.touched.dob && formik.errors.dob? "red":"black"}>{formik.touched.dob && formik.errors.dob?formik.errors.dob:'Album Name'}</FormLabels>
+            <FormLabels htmlFor="album" color={formik.touched.album && formik.errors.album? "red":"black"}>{formik.touched.album && formik.errors.album?formik.errors.album:'Album Name'}</FormLabels>
           </div>
           <div>
             <input type="text"
@@ -123,7 +141,7 @@ const Form = ({setAddFormStatus}) => {
 
       <InputDiv>
           <div>
-             <FormLabels htmlFor="genre" color={formik.touched.salary && formik.errors.salary? "red":"black"} >{formik.touched.salary && formik.errors.salary?formik.errors.salary:'Genre'}</FormLabels>
+             <FormLabels htmlFor="genre" color={formik.touched.genre && formik.errors.genre? "red":"black"} >{formik.touched.genre && formik.errors.genre?formik.errors.genre:'Genre'}</FormLabels>
           </div>
           <div>
              <input

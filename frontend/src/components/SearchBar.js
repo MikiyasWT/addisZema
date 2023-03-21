@@ -8,12 +8,16 @@ import Select from "react-select"
 
 
 
-const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
+const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown,searchTerm,setSearchTerm}) => {
     const [searchIconClicked,setSearchIconClicked] = useState(false)
-
+    
+    const backArrowClicked = () => {
+        setToggle((prev)=>!prev);
+        setSearchTerm('');
+    }
     return(
         <SearchBarWrapper>
-            <BackArrow onClick={()=>setToggle((prev)=>!prev)}>
+            <BackArrow onClick={()=>backArrowClicked()}>
                 <button><h1><FontAwesomeIcon icon={faArrowLeft}  /></h1></button>
                  
             </BackArrow>
@@ -26,15 +30,17 @@ const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
                 {
                     showDropDown && 
                     
-                    <DropdownFIlter>
+                    <DropdownFIlter onChange={(event) => setSearchTerm(event.target.value)} value={searchTerm}>
                                
                                <option value="" hidden>
                                     All Music
                                 </option>
-                                <option value="1">Hip Hop</option>
-                                <option value="2">JAZ</option>
-                                <option value="3">Reggae</option>
-                                <option value="4">Electronics</option> 
+                                <option value="hiphop">Hip Hop</option>
+                                <option value="jaz">JAZ</option>
+                                <option value="reggae">Reggae</option>
+                                <option value="electronics">Electronics</option> 
+                                <option value="Rap">Rap</option>
+                                <option value="latin">dansol</option>
                     </DropdownFIlter>
                     }
             
@@ -42,7 +48,10 @@ const SearchBar = ({toggle,setToggle,showDropDown,setShowDropDown}) => {
             <InputContainer searchIconClicked={searchIconClicked}>
               {
                 searchIconClicked?
-                     <input type="text"  placeholder="Search" />
+                     <input className="searchFilter"
+                            type="text"  
+                            placeholder="Search..." 
+                            onChange={(event) => setSearchTerm(event.target.value)}/>
                      :<button 
                         onClick={(e)=> setSearchIconClicked((prev)=>!prev)}><h1><FontAwesomeIcon icon={faMagnifyingGlass}  /></h1>
                       </button>

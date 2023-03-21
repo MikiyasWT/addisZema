@@ -26,12 +26,7 @@ function* fetchSongs(action) {
 
 async function addNewSongApi(song){
 
-    return await server.post('', {
-        title:song.title,
-        artist:song.artist,
-        album:song.album,
-        genre:song.genre
-    }).then(response => response.data).catch(error => error)
+    return await server.post('', song).then(response => response.data).catch(error => error)
 }
 
 
@@ -76,16 +71,8 @@ function* deleteSong(action){
 
 async function updateSongApi(song){
    
-    return await fetch(apiUrl+`/${song._id}`, {method: "PATCH",body: JSON.stringify({
-        title:song.title,
-        artist:song.artist,
-        album:song.album,
-        genre:song.genre}),
-     headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }, 
-     }).then(response => response.json().catch(error => error));
+
+    return await server.patch(apiUrl+`/${song._id}`,song,).then(response => response.data).catch(err => err)
 }
 
 function* updateSong(action){

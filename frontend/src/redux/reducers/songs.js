@@ -91,11 +91,7 @@ export default function songs(state=initialState, action) {
           song:state.songs.filter(e => (e !== songToBeDeleted ? songToBeDeleted:e))
         }
 
-       case type.SET_SONG_PLAYING:
-        return {
-          ...state,
-          playingSong:action.payload
-        } 
+     
       default:
         return state;
   }

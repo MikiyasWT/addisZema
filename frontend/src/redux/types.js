@@ -3,6 +3,7 @@ export const SHOW_SIDE_BAR = 'SHOW_SIDE_BAR';
 export const SHOW_EDIT_SIDE_BAR = 'SHOW_EDIT_SIDE_BAR';
 export const SELECT_FOR_DELETE = 'SELECT_FOR_DELETE';
 export const SET_SONG_PLAYING = 'SET_SONG_PLAYING';
+export const SELECT_FOR_EDIT = 'SELECT_FOR_EDIT';
 //action types for adding new song
 export const ADD_NEW_SONG_REQUESTED = 'ADD_NEW_SONG_REQUESTED';
 export const ADD_NEW_SONG_SUCCESS = 'ADD_NEW_SONG_SUCCESS';
