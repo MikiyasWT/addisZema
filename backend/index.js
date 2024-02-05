@@ -1,40 +1,35 @@
-
-const express = require('express');
-const cors = require('cors');
-const bodyparser = require('body-parser')
-const mongoose= require('mongoose');
-const songsRouter = require('./routes/songs');
-require('dotenv').config();
-
-
-
-
-
-
+const app = require('./server');
+const {connectToDatabase} = require('./config/database')
 //defining middlewares
-const app = express();
-app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+require("dotenv").config({ path: "config/config.env" });
 
-
-app.use('/songs',songsRouter)
-
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri,
-    {useNewUrlParser:true},
-    {useCreateIndex:true},
-    {autoIndex: true})
-
-const connection = mongoose.connection;
-
-connection.once('open', () => {
-    console.log("Connected to Mongo db Atlas")
-})
-
+connectToDatabase();
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT,()=>{
+const server = app.listen(PORT, () => {
     console.log(`app running on http://localhost:${PORT}`)
-})
+});
+
+process.on('uncaughtException',()=>{
+    console.log("\x1b[31m%s\x1b[0m", `ERROR: ${err.stack}`);
+    console.log(
+      "\x1b[34m%s\x1b[0m",
+      "Shutting down the server due to uncaughtException"
+    );
+    server.close(() => {
+        process.exit(1);
+      });
+});
+
+//Handle Unhandled Promise rejections
+process.on("unhandledRejection", (err) => {
+    console.log("\x1b[31m%s\x1b[0m", `ERROR: ${err.stack}`);
+    console.log(
+      "\x1b[34m%s\x1b[0m",
+      "Shutting down the server due to Unhandled Promise rejection"
+    );
+    server.close(() => {
+      process.exit(1);
+    });
+  });
