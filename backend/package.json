@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "npm install webpack-cli --yes && webpack --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",
