@@ -6,8 +6,6 @@ require('dotenv').config();
 //just to rmember 
 // mongodb+srv://username:pass@cluster0.ozsolec.mongodb.net/collection_name?retryWrites=true&w=majority
 
-
-
 const uri = process.env.ATLAS_URI;
 
 
