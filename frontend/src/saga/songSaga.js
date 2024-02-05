@@ -2,10 +2,10 @@ import axios from "axios";
 //import {getEmployees,getEmployeeById,addEmployee,updateEmployee,deleteEmployee} from "../apis/index"
 import { call, put, takeEvery,StrictEffect, takeLatest } from 'redux-saga/effects';
 //const apiUrl = 'https://jsonplaceholder.typicode.com/users';
-const apiUrl = 'http://localhost:5000/songs'
-
+const apiUrl = 'https://addis-music-api-e0ln.onrender.com/songs'
+// https://addis-music-api-e0ln.onrender.com
 const server = axios.create({
-    baseURL: "http://localhost:5000/songs" 
+    baseURL: "https://addis-music-api-e0ln.onrender.com/songs" 
   });
 
 
