@@ -19,7 +19,7 @@ const [searchTerm,setSearchTerm] = useState('');
 useEffect(() => {
       dispatch(getSongs())
       
-      },[song,searchTerm])
+      },[song,songs,searchTerm])
     return (
       <>
       {

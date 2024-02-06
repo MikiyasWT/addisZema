@@ -4,6 +4,7 @@ import BackDrop from "../Backdrop";
 import deleteicon from "../../assets/images/deleteicon.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {deleteSong} from "../../redux/actions/songs";
+import { useLayoutEffect } from "react";
 
 const modalDropIn  = {
     hidden:{y:"-500vh",opacity:0},
